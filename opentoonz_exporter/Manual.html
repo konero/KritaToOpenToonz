@@ -1,0 +1,146 @@
+<h1>Export Animation to OpenToonz Scene</h1>
+    
+    <p>This plugin exports your Krita animation project to an OpenToonz scene file (.tnz), 
+    including all animated layers as PNG sequences with proper timing data.</p>
+    
+    <h2>Getting Started</h2>
+    
+    <p>To use this plugin:</p>
+    <ol>
+        <li>Open your animation project in Krita</li>
+        <li>Go to <strong>Tools → Scripts → Export Animation to OpenToonz Scene...</strong></li>
+        <li>Set the path to your OpenToonz installation</li>
+        <li>Choose an export location and scene name</li>
+        <li>Configure the export options as needed</li>
+        <li>Click <strong>Export</strong></li>
+    </ol>
+    
+    <h2>What Gets Exported</h2>
+    
+    <p>The plugin creates the following structure:</p>
+    <pre>
+[Export Location]/
+└── [Scene Name]/
+    ├── [Scene Name].tnz          # OpenToonz scene file
+    ├── Layer1/
+    │   ├── Layer1.0001.png       # Frame 1
+    │   ├── Layer1.0002.png       # Frame 2
+    │   └── ...
+    ├── Layer2/
+    │   ├── Layer2.0001.png
+    │   └── ...
+    └── ...</pre>
+    
+    <h3>Exported Content</h3>
+    <ul>
+        <li><strong>Animated paint layers</strong> - Each layer becomes an OpenToonz "level"</li>
+        <li><strong>Keyframe timing</strong> - Hold frames (exposure) are preserved</li>
+        <li><strong>Layer order</strong> - Layers appear as columns in the OpenToonz xsheet</li>
+        <li><strong>Animated groups</strong> - Groups with animated content are flattened and exported (optional)</li>
+        <li><strong>Static layers</strong> - Non-animated layers can be exported as held frames (optional)</li>
+    </ul>
+    
+    <h2>Configuration Options</h2>
+    
+    <h3>OpenToonz Path</h3>
+    <p>The path to your OpenToonz installation is required. The plugin uses OpenToonz's 
+    scripting engine to create the scene file with proper level linking.</p>
+    
+    <ul>
+        <li><strong>Windows:</strong> Usually <code>C:\Program Files\OpenToonz\OpenToonz.exe</code></li>
+        <li><strong>macOS:</strong> Usually <code>/Applications/OpenToonz.app/Contents/MacOS/OpenToonz</code></li>
+        <li><strong>Linux:</strong> Usually <code>/usr/bin/opentoonz</code></li>
+    </ul>
+    
+    <h3>Export Location</h3>
+    <p>Choose where to save the export. A subfolder with the scene name will be created automatically.</p>
+    
+    <h3>Scene Name</h3>
+    <p>The name used for both the folder and the .tnz file. Also used as the base for level names.</p>
+    
+    <h3>Export Options</h3>
+    
+    <h4>Flatten Animated Groups</h4>
+    <p>When enabled, group layers containing animated content are merged into a single 
+    flattened image for each frame. This is useful when your animation has separate layers 
+    for lines and colors within a group, and you want them combined in the final export. 
+    When disabled, the plugin recurses into groups and exports individual paint layers.</p>
+    
+    <h4>Include Invisible Layers</h4>
+    <p>Export animated layers that are currently hidden in Krita. Useful for exporting 
+    alternate versions or work-in-progress layers that you don't want visible while animating.</p>
+    
+    <h4>Include Reference Layers (Grey)</h4>
+    <p>Export layers marked with a grey color label. Reference layers are typically used 
+    as animation guides (e.g., rough sketches, timing references) that shouldn't appear 
+    in the final output. Enable this only if you need these layers in OpenToonz.</p>
+    
+    <h4>Include Non-Animated Layers</h4>
+    <p>Export static paint layers that don't have animation keyframes. These will be 
+    exported as a single frame held from the start to the end of the timeline. Useful for:</p>
+    <ul>
+        <li>Background art</li>
+        <li>Layout/composition guides</li>
+        <li>Peg bar or safety margin references</li>
+        <li>Static foreground elements</li>
+    </ul>
+    
+    <h2>How It Works</h2>
+    
+    <p>The export process:</p>
+    <ol>
+        <li>Scans your document for animated paint layers (and optionally static layers)</li>
+        <li>Exports each unique keyframe as a PNG file</li>
+        <li>Generates a ToonzScript that creates the scene structure</li>
+        <li>Runs the script through OpenToonz to create the .tnz file</li>
+    </ol>
+    
+    <div class="tip">
+        <strong>Tip:</strong> The plugin detects held frames (exposure) automatically. 
+        If frame 1 holds until frame 5, only one PNG is exported, and the timing 
+        is set in the OpenToonz xsheet.
+    </div>
+    
+    <h2>Requirements</h2>
+    
+    <ul>
+        <li>Krita 5.0 or later</li>
+        <li>OpenToonz installed and accessible</li>
+    </ul>
+    
+    <h2>Troubleshooting</h2>
+    
+    <h3>No animated layers found</h3>
+    <p>Make sure your layers have animation keyframes. If you only have static layers, 
+    enable the "Include non-animated layers" option. Check that layers are visible 
+    (or enable "Include invisible layers") and not marked as reference 
+    (grey label) unless you've enabled reference layer export.</p>
+    
+    <h3>Export seems slow</h3>
+    <p>Each unique keyframe requires creating a temporary document for clean export. 
+    Documents with many layers and frames will take longer. A progress bar shows the current status.</p>
+    
+    <h3>Groups not exporting correctly</h3>
+    <p>Check the "Flatten animated groups" option. When enabled, groups are merged into single 
+    images. When disabled, the plugin looks for individual animated layers inside groups.</p>
+    
+    <h2>Version History</h2>
+    
+    <h3>v0.2.0</h3>
+    <ul>
+        <li>Added "Flatten animated groups" option for composite group export</li>
+        <li>Added "Include invisible layers" option</li>
+        <li>Added "Include reference layers" option for grey-labeled layers</li>
+        <li>Added "Include non-animated layers" option for static backgrounds</li>
+    </ul>
+    
+    <h3>v0.1.0</h3>
+    <ul>
+        <li>Initial release</li>
+        <li>Export animated layers as PNG sequences</li>
+        <li>Preserve keyframe timing in OpenToonz xsheet</li>
+        <li>Cross-platform support (Windows, macOS, Linux)</li>
+    </ul>
+    
+    <h2>License</h2>
+    <p>This plugin is released under the GPL-3.0 license.</p>
