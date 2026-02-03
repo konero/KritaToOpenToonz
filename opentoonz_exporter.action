@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActionCollection version="2" name="Scripts">
+    <Actions category="Scripts">
+        <text>Export to OpenToonz</text>
+
+        <Action name="opentoonz_exporter">
+            <icon>opentoonz-export</icon>
+            <text>Export Animation to OpenToonz Scene...</text>
+            <whatsThis>Export animation to OpenToonz scene format (.tnz)</whatsThis>
+            <toolTip>Export animation to OpenToonz scene (.tnz)</toolTip>
+            <iconText>TNZ</iconText>
+            <activationFlags>10000</activationFlags>
+            <activationConditions>0</activationConditions>
+            <shortcut></shortcut>
+            <isCheckable>false</isCheckable>
+            <statusTip>Export animation to OpenToonz scene format (.tnz)</statusTip>
+        </Action>
+    </Actions>
+</ActionCollection>
