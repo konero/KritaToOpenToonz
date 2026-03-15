@@ -19,7 +19,7 @@ Key Features:
 4. Restart Krita
 
 ## Usage
-1. Go to `Tools > Scripts > Export Animation Layers (XDTS)...`
+1. Go to `Tools > Scripts > Export Animation to OpenToonz Scene...`
 2. Select an export directory and configure options
 3. Click export
 
