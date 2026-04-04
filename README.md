@@ -35,7 +35,7 @@ Key Features:
 > Export layers marked with a grey color label. By default, grey-labeled layers are treated as animation reference guides and excluded from export.
 
 ### Include non-animated layers
-> Export static layers (without animation keyframes) as single images. Useful for backgrounds, layouts, peg bars, or safety margin frames. Static layers are exported directly into the export folder without subfolders and not included in the .XDTS exposure sheet file.
+> Export static layers (without animation keyframes) as single images. Useful for backgrounds, layouts, peg bars, or safety margin frames. Static layers are exported directly into the export folder without subfolders.
 
 ## Features
 - Export animated layers as separate PNG sequences
