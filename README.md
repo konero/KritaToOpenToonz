@@ -49,7 +49,7 @@ Head to the Browser room (or open a File Browser panel) and find the exported **
 Go to the menu: **File > Load Scene** and find the exported **.tnz** scene file.
 
 ## Tips
-### Convert Animation to Toonz Raster Levels
+### Convert Animation to Toonz Raster Levels (aka. Smart Raster Levels in Tahoma2D)
 
 A **Toonz Raster Level** is an advanced raster format that supports features such as **color indexing**. Instead of storing colors directly, each pixel references a **style** in the Palette window. This means that changing a style's color automatically updates every area painted with that style throughout the level.
 
