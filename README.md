@@ -1,4 +1,4 @@
-# Krita to OpenToonz Exporter
+# Krita to OpenToonz / Tahoma2D Exporter
 
 Export animated paint layers as image sequences with timing data transfered over to OpenToonz/Tahoma2D scene files (.tnz) automatically and retaining layer stacking order.
 
@@ -50,14 +50,34 @@ Go to the menu: **File > Load Scene** and find the exported **.tnz** scene file.
 
 ## Tips
 ### Convert Animation to Toonz Raster Levels
-A **Toonz Raster Level** is a more advanced raster layer that supports features like **color indexing**, where each pixel references a **style** (in the Palette window) so when you change the color of the style it's automatically updated instantly anywhere that style was drawn or painted. These can also be quickly **masked** in the compositor, for example if you want to grab the color of the eye highlight to apply a glow or bloom effect to it, you can reference it by the style's ID number.
 
-Select your raster layers (blue) on the X-Sheet/Timeline and go to the top menu **Level > Convert > Convert to Toonz Raster...**. Note that if your work is aliased (meaning there is no anti-aliasing or smoothness/blur in the artwork) the conversion is straightforward.
+A **Toonz Raster Level** is an advanced raster format that supports features such as **color indexing**. Instead of storing colors directly, each pixel references a **style** in the Palette window. This means that changing a style's color automatically updates every area painted with that style throughout the level.
 
-1. For the file format, select **tlv**
-2. Mode should be set to **Unpainted TLV from non-AA source** for lines only artwork or **Painted TLV from non-AA source** if the artwork is already painted
+Toonz Raster Levels can also be easily **masked** in the compositor. For example, if you want to isolate an eye highlight and apply a glow or bloom effect, you can reference the highlight by its style ID number.
 
-For artwork that is anti-aliased your miliage may vary and it's not recommended. You will need two copies of your image sequences, one that is lines only (including color separation lines that define the borders between two colors like base colors and shadows), and one that contains the main lineart and paint. OpenToonz will use the lines only sequence to try and detect where **lines** are in the fully painted sequence and the boundaries between two colors. Then, follow the above steps but use **Unpainted TLV** and **Painted TLV from two images**. If you're only converting lines (no paint) use the first option.
+Select your raster levels (blue) in the Xsheet/Timeline, then choose **Level > Convert > Convert to Toonz Raster...** from the top menu.
+
+If your artwork is aliased (pixel art or artwork without anti-aliasing), the conversion process is generally straightforward:
+
+1. Set the file format to **TLV**.
+2. Set the mode to:
+
+   * **Unpainted TLV from non-AA source** for line-only artwork.
+   * **Painted TLV from non-AA source** for artwork that is already painted.
+
+For anti-aliased artwork, results can vary and the process is generally not recommended. You will need two versions of your image sequence:
+
+* A **lines-only** sequence, including any color separation lines that define boundaries between colors such as base colors and shadows.
+* A **painted** sequence containing the final line art and fills.
+
+OpenToonz uses the lines-only sequence to detect linework and color boundaries within the painted sequence. Once both sequences are prepared, follow the same conversion steps as above, but use:
+
+* **Unpainted TLV** for the lines-only sequence.
+* **Painted TLV from two images** for the painted sequence.
+
+If you are converting line art only and do not need paint information, use **Unpainted TLV**.
+
+**TODO**: I'll see if we can export a *_np lines-only reference during the export process, and how that'll work in practice...
 
 ## Troubleshooting
 
